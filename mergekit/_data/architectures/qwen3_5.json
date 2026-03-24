@@ -1,0 +1,121 @@
+{
+    "model_type": "qwen3_5",
+    "architectures": [
+        "Qwen3_5ForConditionalGeneration"
+    ],
+    "pre_weights": [
+        {
+            "name": "model.language_model.embed_tokens.weight",
+            "is_embed": true
+        }
+    ],
+    "post_weights": [
+        {
+            "name": "model.language_model.norm.weight"
+        },
+        {
+            "name": "lm_head.weight",
+            "is_embed": true,
+            "optional": true,
+            "tied_names": [
+                "model.language_model.embed_tokens.weight"
+            ]
+        },
+        {
+            "name": "mtp.fc.weight",
+            "optional": true
+        },
+        {
+            "name": "mtp.norm.weight",
+            "optional": true
+        },
+        {
+            "name": "mtp.pre_fc_norm_embedding.weight",
+            "optional": true
+        },
+        {
+            "name": "mtp.pre_fc_norm_hidden.weight",
+            "optional": true
+        }
+    ],
+    "num_layers_config_key": "text_config.num_hidden_layers",
+    "layer_templates": {
+        "weights": [
+            {
+                "name": "model.language_model.layers.${layer_index}.input_layernorm.weight"
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.mlp.down_proj.weight"
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.mlp.gate_proj.weight"
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.mlp.up_proj.weight"
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.post_attention_layernorm.weight"
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.self_attn.k_norm.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.self_attn.k_proj.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.self_attn.o_proj.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.self_attn.q_norm.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.self_attn.q_proj.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.self_attn.v_proj.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.A_log",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.conv1d.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.dt_bias",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.in_proj_a.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.in_proj_b.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.in_proj_qkv.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.in_proj_z.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.norm.weight",
+                "optional": true
+            },
+            {
+                "name": "model.language_model.layers.${layer_index}.linear_attn.out_proj.weight",
+                "optional": true
+            }
+        ]
+    }
+}

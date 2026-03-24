@@ -51,6 +51,11 @@ def get_config_value(config: PretrainedConfig, key: str) -> Any:
     obj = config
     for idx, part in enumerate(parts):
         if not hasattr(obj, part):
+            # Fall back to the leaf key directly on the root config, to handle
+            # cross-architecture merges (e.g. VLM text_config.X vs text-only X)
+            leaf = parts[-1]
+            if len(parts) > 1 and hasattr(config, leaf):
+                return getattr(config, leaf)
             raise RuntimeError(
                 f"Config {config} has no attribute {'.'.join(parts[: idx + 1])}"
             )
